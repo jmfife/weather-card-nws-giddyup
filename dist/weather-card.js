@@ -51,7 +51,7 @@ const windDirections = [
 
 window.customCards = window.customCards || [];
 window.customCards.push({
-  type: "weather-card",
+  type: "weather-card-nws",
   name: "Weather Card",
   description: "A custom weather card with animated icons.",
   preview: true,
