@@ -98,7 +98,7 @@ class WeatherCard extends LitElement {
 
   static async getConfigElement() {
     await import("./weather-card-editor.js");
-    return document.createElement("weather-card-editor");
+    return document.createElement("weather-card-nws-editor");
   }
 
   static getStubConfig(hass, unusedEntities, allEntities) {
@@ -532,4 +532,4 @@ class WeatherCard extends LitElement {
     `;
   }
 }
-customElements.define("weather-card", WeatherCard);
+customElements.define("weather-card-nws", WeatherCard);
