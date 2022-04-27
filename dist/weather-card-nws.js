@@ -253,10 +253,6 @@ class WeatherCard extends LitElement {
     if (!forecast || forecast.length === 0) {
       return html``;
     }
-    
-    if (forecast.daytime) {
-		return html`<div class="dayname">"Test"</div>`;
-	}
 
     this.numberElements++;
     return html`
