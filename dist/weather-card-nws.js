@@ -255,6 +255,22 @@ class WeatherCard extends LitElement {
     }
 
     this.numberElements++;
+    
+    //handle NWS forecast array
+    if (this._config.hourly_forecast) {
+        var forecastArry = forecast.slice(0, this._config.number_of_forecasts ? this._config.number_of_forecasts : 5);
+    }
+    else {
+        var temp = forecast.flatMap((daily) => new Date(daily.datetime).getDate() == new Date().getDate() ? [] : daily);
+        var night = temp.flatMap((daily) => daily.daytime ? [] : daily.temperature);
+        var day = temp.flatMap((daily) => daily.daytime ? daily : []);
+        var daySliced = day.slice(0, this._config.number_of_forecasts ? this._config.number_of_forecasts : 5);
+        for (let i = 0; i < daySliced.length; ++i) {
+             daySliced[i].templow = night[i];
+        }
+        var forecastArry = daySliced;
+    }
+    
     return html`
       <div class="forecast clear ${this.numberElements > 1 ? "spacer" : ""}">
         ${forecast
