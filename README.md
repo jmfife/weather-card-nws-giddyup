@@ -1,4 +1,8 @@
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
+
 # Lovelace animated weather card
+
+Forked from [bramkragten](https://github.com/bramkragten/weather-card) and updated to work with the [National Weather Service (NWS)](https://www.home-assistant.io/integrations/nws/) integration.  ```hourly_forecast: false``` is required for daily forecast to work correctly.  If using daily forecast the card parses the forecast HA sensor arrry for ```daytime: true``` and adds the low overnight temperatures based on ```daytime: false```.  
 
 Originally created for the [old UI](https://community.home-assistant.io/t/custom-ui-weather-state-card-with-a-question/23008) converted by @arsaboo and @ciotlosm to [Lovelace](https://community.home-assistant.io/t/custom-ui-weather-state-card-with-a-question/23008/291) and now converted to Lit to make it even better.
 
@@ -10,36 +14,8 @@ Thanks for all picking this card up.
 
 ## Installation:
 
-You have 2 options, hosted or self hosted (manual). The first option needs internet and will update itself.
-
-### If you are using Firefox:
-
-Firefox < 66 does not support all the needed functions yet for the editor.
-You change this by enabling `javascript.options.dynamicImport` in `about:config`.
-Or use the version without the editor: [Version without editor](https://raw.githubusercontent.com/bramkragten/custom-ui/58c41ad177b002e149497629a26ea10ccfeebcd0/weather-card/weather-card.js)
-
-# Hosted:
-
-Add the following to resources in your lovelace config:
-
-```yaml
-- url: https://cdn.jsdelivr.net/gh/bramkragten/weather-card/dist/weather-card.min.js
-  type: module
-```
-
-# Manual:
-
-1. Download the [weather-card.js](https://raw.githubusercontent.com/bramkragten/weather-card/v1.2.0/dist/weather-card.js) to `/config/www/custom-lovelace/weather-card/`. (or an other folder in `/config/www/`)
-2. Save, the [amCharts icons](https://www.amcharts.com/free-animated-svg-weather-icons/) (The contents of the folder "animated") under `/config/www/custom-lovelace/weather-card/icons/` (or an other folder in `/config/www/`)
-3. If you use Lovelace in storage mode, and want to use the editor, download the [weather-card-editor.js](https://raw.githubusercontent.com/bramkragten/weather-card/v1.2.0/dist/weather-card-editor.js) to `/config/www/custom-lovelace/weather-card/`. (or the folder you used above)
-
-Add the following to resources in your lovelace config:
-
-```yaml
-resources:
-  - url: /local/custom-lovelace/weather-card/weather-card.js
-    type: module
-```
+### HACS
+ Add this repository in HACS, download, and install. 
 
 ## Configuration:
 
@@ -75,34 +51,4 @@ details: false
 forecast: true
 hourly_forecast: false
 number_of_forecasts: 5
-```
-
-If you want to show the sunrise and sunset times, make sure the `sun` component is enabled:
-
-```yaml
-# Example configuration.yaml entry
-sun:
-```
-
-### Dark Sky:
-
-When using Dark Sky you should put the mode to `daily` if you want a daily forecast with highs and lows.
-
-```yaml
-# Example configuration.yaml entry
-weather:
-  - platform: darksky
-    api_key: YOUR_API_KEY
-    mode: daily
-```
-
-### OpenWeather Map:
-
-When using OpenWeather map you can select hourly(default) or daily forecast to show.
-
-```yaml
-# Example configuration.yaml entry
-weather:
-  - platform: openweathermap
-    api_key: YOUR_API_KEY
 ```
