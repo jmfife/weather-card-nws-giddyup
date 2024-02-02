@@ -258,22 +258,33 @@ class WeatherCardNWS extends LitElement {
     
     //handle NWS forecast array
     if (this._config.hourly_forecast) {
+        // console.log("forecast hourly: ", forecast);
         var forecastArry = forecast.slice(0, this._config.number_of_forecasts ? this._config.number_of_forecasts : 5);
     }
     else {
+        // var forecastCopy = structuredClone(forecast);   // Make a copy for debugging
+        // console.log("forecastCopy: ", forecastCopy);    // Log it
+        // var temp = forecast.flat();
         var temp = forecast.flatMap((daily) => new Date(daily.datetime).getDate() == new Date().getDate() ? [] : daily);
-        var night = temp.flatMap((daily) => daily.daytime ? [] : daily.temperature);
-        var day = temp.flatMap((daily) => daily.daytime ? daily : []);
+        // console.log("temp: ", temp);
+        // temp.shift();  // delete the first element (non-12-hr)
+        // console.log("temp: ", temp);
+        var night = temp.flatMap((daily) => daily.is_daytime ? [] : daily.temperature);
+        // console.log("night: ", night);
+        var day = temp.flatMap((daily) => daily.is_daytime ? daily : []);
+        // console.log("day: ", day);
         var daySliced = day.slice(0, this._config.number_of_forecasts ? this._config.number_of_forecasts : 5);
+        // console.log("daySliced: ", daySliced);
         for (let i = 0; i < daySliced.length; ++i) {
-             daySliced[i].templow = night[i];
+          daySliced[i].templow = night[i];
         }
         var forecastArry = daySliced;
+        // console.log("forecastArry: ", forecastArry);
     }
     
     return html`
       <div class="forecast clear ${this.numberElements > 1 ? "spacer" : ""}">
-        ${forecast
+        ${forecastArry
           .slice(
             0,
             this._config.number_of_forecasts
