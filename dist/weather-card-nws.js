@@ -52,10 +52,10 @@ const windDirections = [
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: "weather-card-nws",
-  name: "Weather Card",
-  description: "A custom weather card with animated icons.",
+  name: "Weather Card NWS",
+  description: "A custom weather card with animated icons for NWS entities.",
   preview: true,
-  documentationURL: "https://github.com/bramkragten/weather-card",
+  documentationURL: "https://github.com/Wetzel402/weather-card-nws",
 });
 
 const fireEvent = (node, type, detail, options) => {
@@ -88,7 +88,7 @@ function hasConfigOrEntityChanged(element, changedProps) {
   return true;
 }
 
-class WeatherCard extends LitElement {
+class WeatherCardNWS extends LitElement {
   static get properties() {
     return {
       _config: {},
@@ -548,4 +548,4 @@ class WeatherCard extends LitElement {
     `;
   }
 }
-customElements.define("weather-card-nws", WeatherCard);
+customElements.define("weather-card-nws", WeatherCardNWS);
